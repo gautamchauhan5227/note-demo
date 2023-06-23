@@ -112,94 +112,90 @@ class NoteFormScreen extends StatelessWidget {
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.60,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: TextFormFieldCustom(
-                        labelText: StringConsatant.title,
-                        initialValue: note.title,
-                        onChanged: (val) => noteModel.setTitle(val),
-                      ),
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: TextFormFieldCustom(
+                      labelText: StringConsatant.title,
+                      initialValue: note.title,
+                      onChanged: (val) => noteModel.setTitle(val),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16)
-                          .copyWith(top: 16),
-                      child: TextFormFieldCustom(
-                        initialValue: note.description,
-                        labelText: StringConsatant.description,
-                        maxLines: 5,
-                        onChanged: (val) => noteModel.setDescription(val),
-                      ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16)
+                        .copyWith(top: 16),
+                    child: TextFormFieldCustom(
+                      initialValue: note.description,
+                      labelText: StringConsatant.description,
+                      maxLines: 5,
+                      onChanged: (val) => noteModel.setDescription(val),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16)
-                          .copyWith(top: 20),
-                      child: GestureDetector(
-                        onTap: () {
-                          selectDate(context);
-                        },
-                        child: Card(
-                          elevation: 2,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Row(
-                              children: [
-                                const Icon(Icons.calendar_month_rounded),
-                                const SizedBox(width: 15),
-                                Text(DateFormat('d MMMM y')
-                                    .format(noteModel.dateTime)
-                                    .toString())
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16)
-                          .copyWith(top: 20),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16)
+                        .copyWith(top: 20),
+                    child: GestureDetector(
+                      onTap: () {
+                        selectDate(context);
+                      },
                       child: Card(
                         elevation: 2,
-                        child: SizedBox(
-                          height: 50,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ListView.builder(
-                              itemCount: colorList.length,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: ((context, index) => Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: GestureDetector(
-                                      onTap: () =>
-                                          noteModel.setColorIndex(index),
-                                      child: Container(
-                                        height: 35,
-                                        width: 35,
-                                        decoration: BoxDecoration(
-                                          color: colorList[index],
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                              width:
-                                                  index == noteModel.colorIndex
-                                                      ? 3
-                                                      : 0,
-                                              color:
-                                                  index == noteModel.colorIndex
-                                                      ? ColorConstants.primary
-                                                      : Colors.transparent),
-                                        ),
-                                      ),
-                                    ),
-                                  )),
-                            ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.calendar_month_rounded),
+                              const SizedBox(width: 15),
+                              Text(DateFormat('d MMMM y')
+                                  .format(noteModel.dateTime)
+                                  .toString())
+                            ],
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16)
+                        .copyWith(top: 20),
+                    child: Card(
+                      elevation: 2,
+                      child: SizedBox(
+                        height: 50,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListView.builder(
+                            itemCount: colorList.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: ((context, index) => Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: GestureDetector(
+                                    onTap: () => noteModel.setColorIndex(index),
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+                                      decoration: BoxDecoration(
+                                        color: colorList[index],
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            width: index == noteModel.colorIndex
+                                                ? 3
+                                                : 0,
+                                            color: index == noteModel.colorIndex
+                                                ? ColorConstants.primary
+                                                : Colors.transparent),
+                                      ),
+                                    ),
+                                  ),
+                                )),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             const Spacer(),
